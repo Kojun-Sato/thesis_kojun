@@ -1,0 +1,197 @@
+\documentclass{graduate}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[]{amsmath}
+\usepackage{enumerate}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{fancybox}
+\usepackage{url}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{here}
+
+\graphicspath{{fig/}}
+
+\title{}
+\author{佐藤孝嗣}
+\major{工学部}
+\department{電気情報工学科}
+\subdepart{}
+
+
+% abstract, chapter1, 2, 3, 4, 5, 6, acknowledgment, bibliography
+
+%\include{chapter/abst}
+
+\begin{document}
+
+\maketitle
+
+%\include{chapter/1}
+%\include{chapter/2}
+%\include{chapter/3}
+%\include{chapter/4}
+%\include{chapter/5}
+%\include{chapter/ack}
+%\appendix
+
+%\bibliographystyle{ieeetr}
+%\bibliography{ref}}
+
+\chapter{はじめに}
+
+\chapter{光デバイスを用いたベクトル行列積演算器の紹介}
+本章では、はじめに光デバイスを用いたベクトル行列積演算器の用いられている基本素子について紹介し、その後どのようにベクトル行列積演算器を実現しているかを説明する。
+\section{基本素子の紹介}
+\subsection{方向性結合器}
+方向性結合器(DC：Direcional Coupler)とは、１つの伝達経路（以下、導波路)から光信号を2つの導波路に分岐したり、あるいは2つの導波路からの光信号を１つの導波路に結合する機能を有するデバイスである．２つの導波路を十分に近い距離で平行に並べると、光波は2つの導波路間を移動する．入力ポート1に入力された光波が、他方の出力側導波路である出力ポート２に移動することをクロス、同一の出力側導波路である出力ポート１を通過することをスルーと呼ぶ．入力光のエネルギーに対するクロスした光波のエネルギー比率を透過率と呼び、スルーした光波のエネルギー比率を反射率と呼ぶ．これらの比率は２本の並行する導波路の長さと結合係数に依存して決定される．また導波路型のDCにおいては、クロスへの透過で位相がπ/２シフトするという特徴を持つ．
+\subsection{位相シフタ}
+位相シフタ(PS：Phase Shifter)は入力ポートに入射してきた光の位相を、制御ポートのからの信号の大きさに応じて変化させて出力ポートに出力するデバイスである．このとき、位相の変化量$\Delta\theta$は制御信号の大きさIに比例する．\par
+\begin{equation}
+\Delta\theta=kI\,\,\,\,\,\,(k:　比例定数)
+\end{equation}
+\subsection{マッハツェンダ干渉器}
+マッハツェンダ干渉器(MZI：Mach-Zehnder Interferormeter)の回路は、2つのDCと１つのPSから構成され、PSによって生じた位相差に従って出力光の強度を変化させるという特徴を有する．たとえば、DCの反射率、透過率ともに0.5であり、PSは制御信号により位相をπシフトする(ON時)もしくは位相シフトしない(OFF時)という２値制御が可能な構成を考える．この際入力ポート１から入力された光波は、PSがON時に出力ポート１から出力され、逆にOFFの時には出力ポート２から出力される経路切替スイッチとしての機能を果たす．
+\subsection{光増幅器}
+光増幅器とは入力ポートから入射してきた光信号の電界強度を電気信号に変換することなく増幅させ、出力ポートに出力する増幅器である．動作原理の詳細は後述する．
+\subsection{フォトディテクタ}
+フォトディテクタは光信号を電気信号に変換する計測用デバイスであり、受光素子(光電変換素子)に入射した光の強度に比例した電流を出力する．
+\section{MZIを用いたベクトル行列積演算器}
+
+\chapter{MZIVMMを構成する光素子の動作原理と雑音}
+本章ではMZIVMMを構成する各光素子の動作原理と、各光素子でどのように雑音が生じるかを示す．
+		\section{光源の雑音}
+MZIVMMの光の干渉を利用して光信号を処理・演算するという特徴から、MZIVMMで使用する光源は位相のそろった(コヒーレントな)光を発する必要がある．そこでMZIVMMの光源にはレーザーを採用する．レーザー(laser)とは「放射の誘導放出による光増幅」(Light Amplification by Stimulated Emission of Radiation)の頭文字から作られた言葉である． 本節ではレーザーの動作原理を説明し、そこから雑音について説明する．
+		\subsection{レーザーの動作原理}
+		\label{subsec:吸収と放出}
+エネルギー準位とは原子や分子などが定常状態にあるときのエネルギーの状態のことである．物質中の電子のエネルギー準位は任意の値をとることはできず、不連続なとびとびの値を持つ．\par まず、2つのエネルギー準位からなる原子を考える．エネルギーの低い準位を準位１、高い準位を準位２とし、それらのエネルギーをそれぞれ$W_１、W_2$とする．図\ref{fig:absorb_light}に示すように、原子が準位１の状態にあるときに角周波数$ω＝(W_2ーW_1)/\hbar $の光、つまり$W_1とW_2の差と同じ大きさのエネルギーを持つ光$が原子に入射すると、入射光のエネルギーによって原子が準位１から準位２にあげられる(励起される)．これを光の吸収と呼ぶ．また、逆に図\ref{fig:光放出}のように高いエネルギー準位にいる原子が角周波数$ω＝(W_2ーW_1)/\hbar $の電磁波を放出して、低いエネルギー準位に移る過程も存在する．この過程を光の放出と呼ぶ．\\
+\begin{figure}[htbp]
+\begin{tabular}{cc}
+\centering
+\begin{minipage}{0.5\hsize}
+
+	\includegraphics[width=7.0cm,bb=0 0 333 185]{tex_graphics/absorb_light.png}
+	\caption{2準位系における光の吸収}
+	\label{fig:absorb_light}
+
+\end {minipage}
+
+\centering
+\begin{minipage}{0.5\hsize}
+	
+	\includegraphics[width=7.0cm,bb=0 0 316 177]{tex_graphics/光放出.png}
+	\caption{2準位系における光の放出}
+	\label{fig:光放出}
+\end{minipage}
+\end{tabular}
+\end{figure}
+図\ref{fig:誘導放出}のように、原子が準位2の状態にあるときに、角周波数$ω＝(W_2ーW_1)/\hbar $の光を原子に入射させると、この光に誘発されて原子は角周波数$ω＝(W_2ーW_1)/\hbar $の光を放射する．これを誘導放出と呼ぶ．誘導放出された光は入射光と進行方向および位相が同じであるという特徴がある．レーザーは強い誘導放出を起こさせ、進行方向および位相のそろった強い光を放射している．
+
+\begin{figure}[htbp]
+	\centering	
+	\includegraphics[width=7.0cm,bb=0 0 316 177]{tex_graphics/誘導放出.png}
+	\caption{光の誘導放出}
+	\label{fig:誘導放出}
+\end{figure}
+光の放出は原子の周囲に光が存在しない時にも自発的におこることがある．これを自然放出と呼ぶ．このとき、放出光の位相はランダムな値をとる．\par
+角周波数$ω＝(W_2ーW_1)/\hbar $の光は、準位２の状態にある原子から光を誘導放出させるが、準位１の状態にある原子によって吸収されてるので、角周波数$ω＝(W_2ーW_1)/\hbar $の強い光を作るためには準位２の状態にある原子の数を準位１の状態にある原子の数より多くさせる必要がある．このために外部から電流の注入などを行い励起した原子の数を増やすことをポンピングという．また低いエネルギー準位にある原子よりも高いエネルギー準位にある原子の方が多い状態を反転分布と呼び、この状態を作ることがレーザーにより強い光を放射するために必要な条件である。
+	\subsection{レーザーの雑音}
+レーザーにおける雑音は自然放出に起因している．自然放出光は誘導放出により放出された光と位相、方向がそろっていないため、誘導放出光と干渉を起こし雑音を発生させる．\\
+		\section{光増幅器の雑音}
+		\subsection{光増幅器の動作原理}
+光増幅器の動作原理は\ref{subsec:吸収と放出}節で紹介した誘導放出で説明できる．光増幅器内部では反転分布が形成されており、光増幅器に入射した光は光増幅器内部の励起された原子により生じた誘導放出で増幅される。
+		\subsection{光増幅器の雑音特性}
+光増幅器の雑音性能を表す指標として、雑音指数(Noise Figure： NF)を用いる。雑音指数の定義は入力信号のSNRと出力信号のSNRを用いて次のように表される．ただし、SNR(Signal-to-Noise Ratio)とは$SNR＝\dfrac{(信号パワー)}{（雑音パワー)}$で定義される．\par
+
+
+\begin{equation}
+NF＝10log_{10} [\dfrac{(SNR)_{in}}{(SNR)_{out}}]
+\end{equation}
+
+ここで光の場合、信号光を理想的な光検出器で電気信号へ変換した時の電流の平均値の二乗で信号パワー、分散で雑音パワーを定義できる．また、光検出器で電気信号に変換した時の電流の大きさは入力光子数に比例するので、入力光子数の平均値Nと分散$\sigma^2$を使って\par
+\begin{equation}
+SNR=\dfrac{N^2}{\sigma^2}
+\end{equation}
+と表せる．\par
+入力光の単位時間あたりの入力光子数はポアソン分布に従い、分散は平均値に一致しているので、光子数の平均と分散は平均入力光パワー$P_0$とプランク定数h、振動数ｆを使って\par
+\begin{equation}	
+平均：\dfrac{P_0}{hf}	\,\,\,\,\,\,	分散：\dfrac{P_0}{hf}
+\end{equation}
+となり、入力光のSNRは\par
+\begin{equation}
+	(SNR)_{in}=\dfrac{(P_0/hf)^2}{P_0/hf}=\dfrac{P_0}{hf}
+\end{equation}
+と表せる．\par
+一方、光増幅器の出力光電場は入力光が誘導放出により増幅された増幅信号光$E_{sig}$と、自然放出により生じた光が増幅器内で増幅された光$E_k$(k＝1,2,3,．．．)の足しあわせで表現される．\par
+ \begin{equation}
+E_{out}=\sqrt{G}E_{sig}+\sum_k E_k\,\,\,\,\,\,\,(G：光増幅器のゲイン) 
+\end{equation}
+この光パワーは\par
+
+\begin{equation}
+P_{out}=|E_{out}|^2=GE_{sig}^2+2\sqrt{G}\sum_k (|E_{sig}E_k|)+\sum_k\sum_{k'} E_kE_{k'}
+\end{equation}
+ここで、上式の第３項は第１項、第２項に比べ十分小さいので無視する．上式の第１項を光パワーの平均、第２項の二乗を分散とすると\par
+\begin{equation}
+平均：GP_0\,\,\,\,\,\,\,\,
+分散：4GA_0^2\sum_k |E_k|^2=2GA_0\sum_k E_k^2
+\end{equation}
+ここで自然放出光の全パワー$\sum_k E_k^2は(G-1)n_{sp}hf$と表せることを用いて\\($n_{sp}=\dfrac{N_2}{N_2-N_1}$\,\,\,\,\,$N_２:励起状態の原子数\,\,\,\,\,N_１:基底状態の原子数$)\par
+\begin{equation}
+分散：２GA_0(G-1)n_{sp}hf
+\end{equation}
+
+よって出力光パワーのSNRは\par
+\begin{equation}
+(SNR)_{out}=\dfrac{G^2P_0^2}{2GP_0(G-1)n_{sp}hf}=\dfrac{GP_0}{2(G-1)n_{sp}hf}\approx
+\dfrac{P_0}{2n_{sp}hf}
+\end{equation}
+以上より、光増幅器のNFは\par
+
+\begin{equation}
+NF=10log_{10}\dfrac{(SNR)_{in}}{(SNR)_{out}}=10log_{10}(2n_{sp})
+\end{equation}
+
+と導出できる．\par
+このNFを決める要因となっている$n_{sp}=\dfrac{N_2}{N_2-N_1}$の極限は$N_1/N_2=０$のときで$n_{sp}=1$となる．つまり最も小さくてもNF=3dBまでしかならない．
+
+
+		\section{位相シフタの雑音}
+		\section{フォトディテクタの雑音}
+		\subsection{フォトディテクタの動作原理}
+
+		\subsection{フォトディテクタの雑音}
+フォトディテクタの雑音は熱雑音とショットノイズの２つに分類できる．\par
+熱雑音とは受光素子を動作させる回路に存在する抵抗体内の自由電子の不規則な熱運動から生じる雑音である．１つの抵抗を考えると、全体では電荷量がつり合って電気的に中性になっているが、自由電子が熱運動するため、局部的に密度に揺らぎが生じ、その結果抵抗の両端に雑音電圧が発生する．
+熱雑音の雑音電流$i_j$はボルツマン定数ｋと素子の絶対温度T、雑音の帯域幅Bをもちいて\par
+\begin{equation}
+i_j=\sqrt{\dfrac{4kTB}{R_{sh}}}  [A]
+\end{equation}
+と表せる．\par
+ショットノイズとは、光子の粒子性が原因となり、検出される光子の数がゆらぐことにより生じる雑音である．フォトディテクタにおけるショットノイズは暗電流に起因するもの$i_{SD}$と、光電流に起因するもの$i_{SL}$の2種類である．ここで暗電流とは光電効果を示す半導体などの電気素子に電圧を加えた時に、熱的原因、絶縁不良、結晶欠陥などによって起こる、光を電気素子に当てなくても流れる電流のことである．また光電流は光を当てることによって生じた電流である．\\
+\begin{equation}
+i_{SD}=\sqrt{2qI_DB} [A]
+i_{SL}=\sqrt{2qI_LB} [A]
+\end{equation}
+(q: 1電子あたりの電荷量\,\,\,\,\,\,$I_D$: 暗電流\,\,\,\,\,\,$I_L$:光電流)\\
+よってノイズ電流$I_n$の大きさは\\
+\begin{equation}
+I_n＝\sqrt{i_j^2+i_{SD}^2+i_{SL}^2}
+\end{equation}
+
+となる．\\
+\\\\\\\\\\\\
+
+参考文献\\
+［1］前原進也”半導体レーザの周波数雑音特性と物理乱数生成への応用”\\
+［2］山田実”半導体レーザーの雑音測定”\\
+［3］長谷川英明”半導体光増幅器の低雑音動作”
+
+%\begin{bibliography}{9}
+
+%\bibitem{Laser}　前原進也,''半導体レーザの周波数雑音特性と物理乱数生成への応用''	
+%\end{bibliography}	
+\end{document}
+

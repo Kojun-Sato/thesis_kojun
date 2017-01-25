@@ -1,0 +1,24 @@
+\contentsline {chapter}{\numberline {1}はじめに}{1}
+\contentsline {chapter}{\numberline {2}光デバイスを用いたベクトル行列積演算器の紹介}{3}
+\contentsline {section}{\numberline {2.1}基本素子の紹介}{3}
+\contentsline {subsection}{\numberline {2.1.1}方向性結合器}{3}
+\contentsline {subsection}{\numberline {2.1.2}位相シフタ}{4}
+\contentsline {subsection}{\numberline {2.1.3}マッハツェンダ干渉器}{4}
+\contentsline {subsection}{\numberline {2.1.4}光増幅器}{4}
+\contentsline {subsection}{\numberline {2.1.5}フォトディテクタ}{5}
+\contentsline {section}{\numberline {2.2}MZIを用いたベクトル行列積演算器}{5}
+\contentsline {subsection}{\numberline {2.2.1}MZIによるユニタリ行列演算}{5}
+\contentsline {subsection}{\numberline {2.2.2}光デバイスを用いた任意のベクトル行列積演算}{5}
+\contentsline {chapter}{\numberline {3}MZIVMMを構成する光素子の動作原理と雑音}{7}
+\contentsline {section}{\numberline {3.1}光源の雑音}{7}
+\contentsline {subsection}{\numberline {3.1.1}レーザーの動作原理}{7}
+\contentsline {subsection}{\numberline {3.1.2}レーザーの雑音}{9}
+\contentsline {section}{\numberline {3.2}光増幅器の雑音}{9}
+\contentsline {subsection}{\numberline {3.2.1}光増幅器の動作原理}{9}
+\contentsline {subsection}{\numberline {3.2.2}光増幅器の雑音特性}{9}
+\contentsline {section}{\numberline {3.3}位相シフタの雑音}{11}
+\contentsline {section}{\numberline {3.4}フォトディテクタの雑音}{11}
+\contentsline {subsection}{\numberline {3.4.1}フォトダイオードの動作原理}{11}
+\contentsline {subsection}{\numberline {3.4.2}フォトダイオードの雑音}{12}
+\contentsline {subsubsection}{熱雑音}{12}
+\contentsline {subsubsection}{ショットノイズ}{13}
